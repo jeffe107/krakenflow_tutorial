@@ -15,18 +15,17 @@ Our goal is to develop a workflow that takes **FASTQ** files from one or multipl
 
 <div markdown class="metagenomics">
 
-![Metagenomics](../../assets/img/workflow_kraken.png)
+![Metagenomics](../../assets/img/workflow_krakenflow.png)
 
 </div>
 
 To perform these steps, we will use the following tools:
 
-1. **Host removal** with [**Bowtie2**](https://bowtie-bio.sourceforge.net/bowtie2/manual.shtml) by aligning the reads against an indexed reference genome.
-   **Here, we are using the indexed genome of yeast given the computational limitations we have on GitHub Codespaces and only for educational purposes**. Nonetheless, you can use any organism you are interested in by building [your own index](https://www.metagenomics.wiki/tools/bowtie2/index) or downloading a [precomputed one](https://benlangmead.github.io/aws-indexes/bowtie).
+1. **Host removal** with [**Bowtie2**](https://bowtie-bio.sourceforge.net/bowtie2/manual.shtml) by aligning the reads against an indexed reference genome. Nonetheless, you can use any organism you are interested in by building [your own index](https://www.metagenomics.wiki/tools/bowtie2/index) or downloading a [precomputed one](https://benlangmead.github.io/aws-indexes/bowtie).
 2. **Taxonomic classification** with [**Kraken2**](https://ccb.jhu.edu/software/kraken2/).
    This tool relies on an indexed database that can be [downloaded](https://benlangmead.github.io/aws-indexes/k2).
    Alternatively, you can build your customized version following [these instructions](https://avilpage.com/2024/07/mastering-kraken2-build-custom-db.html).
-   Here, we will use the Viral database, therefore this methodology is labeled as "viral metagenomics".
+   Here, we will use the custom database with 50 bacterial species that we have selected only for the purpose of this tutorial.
    However, you can annotate bacteria, archaea and more simply by switching to another database.
 3. **Bayesian re-estimation of species abundance** with [**Bracken**](https://ccb.jhu.edu/software/bracken/index.shtml?t=manual).
    This software is designed to compute species abundance using Kraken classification results as described in the reference paper.

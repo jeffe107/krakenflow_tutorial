@@ -38,7 +38,7 @@ process BOWTIE2 {
 
     script:
     """
-    export BOWTIE2_INDEXES=/workspaces/training/nf4-science/KrakenFlow/data/yeast
+    export BOWTIE2_INDEXES=/workspaces/training/nf4-science/KrakenFlow/genome/TAIR10
     bowtie2 -x $bowtie2_index -1 ${reads[0]} -2 ${reads[1]} -p 2 -S ${sample_id}.sam --un-conc-gz ${sample_id}
     """
     }
@@ -386,8 +386,8 @@ This is where we provide default input parameters for the pipeline and enable th
 params {
     reads                                 = null
     outdir                                = "/workspaces/training/nf4-science/KrakenFlow/output"
-    bowtie2_index                         = "/workspaces/training/nf4-science/KrakenFlow/data/yeast/yeast"
-    kraken2_db                            = "/workspaces/training/nf4-science/KrakenFlow/data/viral_db"
+    bowtie2_index                         = "/workspaces/training/nf4-science/KrakenFlow/data/genome/TAIR10/TAIR10"
+    kraken2_db                            = "/workspaces/training/nf4-science/KrakenFlow/data/krakendb"
     }
 
 // Enable using docker as the container engine to run the pipeline
@@ -467,7 +467,7 @@ You can either download it and open it in your browser, or install the [preview]
 
 !!!note
 
-    Keep in mind that we used the viral database **(only for an educational purpose)**, so you will see information about the viruses contained in the sample.
+    Keep in mind that we used a custom database **(only for an educational purpose)**, so you will see information about the bacterial species contained in the sample.
     To perform the analysis with bacteria and beyond you have to download a different database from [here](https://benlangmead.github.io/aws-indexes/k2) or build your own.
 
 ---

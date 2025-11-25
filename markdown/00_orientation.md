@@ -22,16 +22,28 @@ Specifically, this is a set of files that constitute the database required by Kr
 Run the following commands in that exact order and wait until all of them are finished:
 
 ```bash
-mkdir -p data/viral_db && cd "$_"
-wget --no-check-certificate --no-proxy 'https://genome-idx.s3.amazonaws.com/kraken/k2_viral_20241228.tar.gz'
-tar -xvzf k2_viral_20241228.tar.gz
-rm -r k2_viral_20241228.tar.gz
+mkdir -p data/krakendb && cd "$_"
+wget --no-check-certificate --no-proxy 'https://zenodo.org/api/records/17708950/files/krakendb.tar.gz/content'
+tar -xvzf content
+rm -r content
 cd -
 ```
 
-Briefly, this creates a directory called `viral_db` under `data/` and moves into it.
+Briefly, this creates a directory called `krakendb` under `data/` and moves into it.
 Then, it downloads an archive file with `wget`, unpacks its contents with `tar`, and deletes the original archive file.
 Finally, it moves you back up to the original `nf4-science/KrakenFlow/` directory.
+
+Now, we need to retrieve the indexed genome to remove host reads. We are going to use the _Arabidopsis thaliana_ genome assembly TAIR10 that has been already indexed. There more available indexed genomes [here](https://benlangmead.github.io/aws-indexes/bowtie) or you can build [your own index](https://www.metagenomics.wiki/tools/bowtie2/index). Run the following commands then:
+
+```bash
+mkdir -p data/genome && cd "$_"
+wget --no-check-certificate --no-proxy 'https://genome-idx.s3.amazonaws.com/bt/TAIR10.zip'
+unzip TAIR10.zip
+rm -r TAIR10.zip
+cd -
+```
+
+This code block follows the same procedure as for downloading the Kraken2 database.
 
 Now, let's take a look of the files contained in this directory with the `tree` command:
 
@@ -43,40 +55,42 @@ Here you should see the following directory structure:
 
 ```console title="Directory contents"
 .
+├── assets
+│   ├── logo_krakenflow.png
+│   └── workflow_krakenflow.png
 ├── bin
 │   └── report.Rmd
 ├── data
+│   ├── genome
+│   │   └── TAIR10
+│   ├── krakendb
+│   │   ├── database250mers.kmer_distrib
+│   │   ├── database250mers.kraken
+│   │   ├── database.kraken
+│   │   ├── hash.k2d
+│   │   ├── names.dmp
+│   │   ├── nodes.dmp
+│   │   ├── opts.k2d
+│   │   ├── seqid2taxid.map
+│   │   └── taxo.k2d
 │   ├── samples
 │   │   ├── ERR2143768
-│   │   │   ├── ERR2143768_1.fastq
-│   │   │   └── ERR2143768_2.fastq
 │   │   ├── ERR2143769
-│   │   │   ├── ERR2143769_1.fastq
-│   │   │   └── ERR2143769_2.fastq
 │   │   ├── ERR2143770
-│   │   │   ├── ERR2143770_1.fastq
-│   │   │   └── ERR2143770_2.fastq
 │   │   └── ERR2143774
-│   │       ├── ERR2143774_1.fastq
-│   │       └── ERR2143774_2.fastq
-│   ├── samplesheet.csv
-│   └── yeast
-│       ├── yeast.1.bt2
-│       ├── yeast.2.bt2
-│       ├── yeast.3.bt2
-│       ├── yeast.4.bt2
-│       ├── yeast.rev.1.bt2
-│       └── yeast.rev.2.bt2
+│   └── samplesheet.csv
+├── LICENSE
 ├── main.nf
 ├── modules
 │   ├── bowtie2.nf
 │   ├── bracken.nf
-│   ├── kReport2Krona.nf
 │   ├── knit_phyloseq.nf
 │   ├── kraken2.nf
 │   ├── kraken_biom.nf
+│   ├── kReport2Krona.nf
 │   └── ktImportText.nf
 ├── nextflow.config
+├── README.md
 └── workflow.nf
 ```
 
@@ -88,8 +102,8 @@ Here you should see the following directory structure:
 - **`modules`** is a really important folder since here we find dedicated files per each process of the pipeline.
 - **`bin`** is the directory where we store customized scripts that can be run within a given process.
 - **`data`** contains input data and related resources:
-  - An indexed genome within the `yeast` folder representing the host genome to which we want to map the reads for contamination removal.
-  - _viral_db_ is a directory that contains the Kraken2 database necessary for both taxonomic annotation and species abundance re-estimation.
+  - An indexed genome within the `genome` folder representing the host genome to which we want to map the reads for contamination removal.
+  - _krakendb_ is a directory that contains the Kraken2 database necessary for both taxonomic annotation and species abundance re-estimation.
   - _samplesheet.csv_ lists the IDs and paths of the example data files, for processing in batches.
   - _samples_ directory is where the raw sequences are stored.
     The names correspond to accession numbers that you can search on the [Sequence Read Archive](https://www.ncbi.nlm.nih.gov/sra)
