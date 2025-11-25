@@ -1,17 +1,17 @@
 # Orientation
 
-The training environment contains all the software, code and data necessary to work through this tutorial, so you don't need to install anything yourself.
+The training environment contains all the software, code and data necessary to work through this training course, so you don't need to install anything yourself.
 However, you do need a (free) account to log in, and you should take a few minutes to familiarize yourself with the interface.
 
-If you have not yet done so, please the [Environment Setup](https://training.nextflow.io/latest/envsetup/) mini-course before going any further.
+If you have not yet done so, please follow the [Environment Setup](https://training.nextflow.io/latest/envsetup/) mini-course before going any further.
 
 ## Materials provided
 
-For the purpose of the tutorial, we'll be working in the `nf4-science` directory, where you will find all the code files, test data and accessory files you will need.
-To move into it, run the following commands:
+For the purpose of the course, we'll be working in the `nf4-science/` directory, where you will find all the code files, test data and accessory files you will need.
+To move into it, run the following command:
 
 ```bash
-cd nf4-science/
+cd nf4-science
 git clone https://github.com/jeffe107/KrakenFlow
 cd KrakenFlow
 ```
@@ -31,7 +31,7 @@ cd -
 
 Briefly, this creates a directory called `viral_db` under `data/` and moves into it.
 Then, it downloads an archive file with `wget`, unpacks its contents with `tar`, and deletes the original archive file.
-Finally, it moves you back up to the original `nf4-science/KrakenFlow` directory.
+Finally, it moves you back up to the original `nf4-science/KrakenFlow/` directory.
 
 Now, let's take a look of the files contained in this directory with the `tree` command:
 
@@ -89,14 +89,14 @@ Here you should see the following directory structure:
 - **`bin`** is the directory where we store customized scripts that can be run within a given process.
 - **`data`** contains input data and related resources:
   - An indexed genome within the `yeast` folder representing the host genome to which we want to map the reads for contamination removal.
-  - *`viral_db`* is a directory that contains the Kraken2 database necessary for both taxonomic annotation and species abundance re-estimation.
-  - *`samplesheet.csv`* lists the IDs and paths of the example data files, for processing in batches.
-  - *`samples`* directory is where the raw sequences are stored.
-    The names correspond to accession numbers that you can search on the [Sequence Read Archive (SRA)](https://www.ncbi.nlm.nih.gov/sra)
+  - _viral_db_ is a directory that contains the Kraken2 database necessary for both taxonomic annotation and species abundance re-estimation.
+  - _samplesheet.csv_ lists the IDs and paths of the example data files, for processing in batches.
+  - _samples_ directory is where the raw sequences are stored.
+    The names correspond to accession numbers that you can search on the [Sequence Read Archive](https://www.ncbi.nlm.nih.gov/sra)
 
 !!!note
 
     Don't panic if this feels like a lot.
     This is just a glimpse of the material, and we are going to dig into each necessary file for the analysis in due time.
 
-Now, to begin the tutorial, click on the arrow in the bottom right corner of this page.
+Now, to begin the course, click on the arrow in the bottom right corner of this page.

@@ -3,7 +3,8 @@
     { id: 'index', path: 'markdown/index.md', label: 'Overview' },
     { id: 'orientation', path: 'markdown/00_orientation.md', label: 'Orientation' },
     { id: 'pipeline', path: 'markdown/01_pipeline.md', label: 'Part 1: Pipeline' },
-    { id: 'multi', path: 'markdown/02_multi-sample.md', label: 'Part 2: Multi-sample' },
+    { id: 'simple', path: 'markdown/02_single-sample.md', label: 'Part 2: Single sample' },
+    { id: 'multi', path: 'markdown/03_multi-sample.md', label: 'Part 3: Multi-sample' },
   ];
 
   const els = {
