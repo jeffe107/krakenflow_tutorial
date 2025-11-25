@@ -41,7 +41,7 @@ process BOWTIE2 {
     export BOWTIE2_INDEXES=/workspaces/training/nf4-science/KrakenFlow/data/yeast
     bowtie2 -x $bowtie2_index -1 ${reads[0]} -2 ${reads[1]} -p 2 -S ${sample_id}.sam --un-conc-gz ${sample_id}
     """
-}
+    }
 ```
 
 Let's take a moment to break down what we are seeing here.
@@ -113,7 +113,7 @@ process KRAKEN2 {
 	--paired \
 	${reads_1} ${reads_2} > ${sample_id}.kraken2
 	"""
-}
+    }
 ```
 
 At first glance, you can see that it follows the same structure as the previous process.
@@ -169,7 +169,7 @@ process BRACKEN {
 	-o ${sample_id}.bracken \
 	-w ${sample_id}.breport
 	"""
-}
+    }
 ```
 
 Once again, this module follows the same structure as the previous process.
@@ -224,7 +224,7 @@ process K_REPORT_TO_KRONA {
 	-o ${sample_id}.b.krona.txt \
 	--no-intermediate-ranks
 	"""
-}
+    }
 ```
 
 As before, this process takes as input the exact output from Bracken in a tuple form, and it is going to generate another tuple containing `sample id` and the `*.txt` file with the abundance metrics.
@@ -255,7 +255,7 @@ process KT_IMPORT_TEXT {
 	ktImportText ${krona_txt} \
 	-o ${sample_id}.krona.html
 	"""
-}
+    }
 ```
 
 This process takes as input the plain `*.txt` in a tuple with the sample ID, and uses Krona to render the Krona plot in a self-contained `*.html` file, which is the final output of our pipeline at this stage.
@@ -388,7 +388,7 @@ params {
     outdir                                = "/workspaces/training/nf4-science/KrakenFlow/output"
     bowtie2_index                         = "/workspaces/training/nf4-science/KrakenFlow/data/yeast/yeast"
     kraken2_db                            = "/workspaces/training/nf4-science/KrakenFlow/data/viral_db"
-}
+    }
 
 // Enable using docker as the container engine to run the pipeline
 docker.enabled = true

@@ -94,7 +94,7 @@ process KRAKEN_BIOM {
     extracted=\$(echo "\${list[@]}" | tr ' ' '\n' | awk 'NR % 3 == 2')
     kraken-biom \${extracted} --fmt json -o merged.biom
     """
-}
+    }
 ```
 
 This process will _collect_ each output from the Bracken files to build a single `*.biom` file that contains the abundance species data of all the samples.
@@ -150,7 +150,7 @@ process KNIT_PHYLOSEQ {
     outreport=\$(realpath ${outdir})
     Rscript -e "rmarkdown::render('${report}', params=list(args='\${biom_path}'),output_file='\${outreport}/report.html')"
     """
-}
+    }
 ```
 
 As you can see, we are declaring some variables both in Nextflow and bash to be able to call the script.

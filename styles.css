@@ -74,8 +74,20 @@ article h3 { font-size: 1.2rem; margin: 20px 0 8px; }
 article p { color: var(--text); }
 article code { background: var(--code-bg-inline); color: var(--code-text); padding: 1px 6px; border-radius: 4px; border: 1px solid var(--code-border); }
 pre { background: var(--code-bg-block); color: var(--code-text); border: 1px solid var(--code-border); padding: 14px; overflow: auto; border-radius: 8px; }
-pre code { background: transparent; padding: 0; color: inherit; }
+pre code { background: transparent; padding: 0; color: inherit; line-height: 1; }
 .code-title { color: var(--muted); font-size: .85rem; margin: 0 0 6px; }
+pre.has-linenums { padding-left: 0; }
+pre.has-linenums code { display: block; counter-reset: line var(--line-start, 0); }
+pre.has-linenums code span { display: block; padding-left: 3em; position: relative; counter-increment: line; line-height: 1.15; }
+pre.has-linenums code span::before {
+  content: counter(line);
+  position: absolute;
+  left: 0;
+  width: 2.6em;
+  text-align: right;
+  color: var(--muted);
+  padding-right: .5em;
+}
 
 ul, ol { padding-left: 22px; }
 li { margin: 6px 0; }

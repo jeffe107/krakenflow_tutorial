@@ -36,6 +36,24 @@
     return s.replace(/[&<>]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c]));
   }
 
+  function parseFenceMeta(info) {
+    const attrs = {};
+    if (!info) return { lang: '', attrs };
+    const attrPattern = /(\w+)\s*=\s*("(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*'|[^\s]+)/g;
+    let match;
+    while ((match = attrPattern.exec(info))) {
+      let value = match[2] || '';
+      if ((value.startsWith('"') && value.endsWith('"')) || (value.startsWith("'") && value.endsWith("'"))) {
+        value = value.slice(1, -1);
+      }
+      attrs[match[1].toLowerCase()] = value;
+    }
+    attrPattern.lastIndex = 0;
+    const stripped = info.replace(attrPattern, ' ').trim();
+    const lang = stripped ? stripped.split(/\s+/)[0].replace(/^\./, '') : '';
+    return { lang, attrs };
+  }
+
   function parseAdmonition(lines, i) {
     const m = lines[i].match(/^!!!\s*(\w+)/);
     if (!m) return null;
@@ -61,17 +79,37 @@
     let j = i + 1;
     const body = [];
     while (j < lines.length && !/^```\s*$/.test(lines[j])) { body.push(lines[j]); j++; }
-    // Skip closing fence if present
     if (j < lines.length && /^```\s*$/.test(lines[j])) j++;
 
-    // Extract optional title= or title "..." patterns
-    let title = '';
-    const titleMatch = info.match(/title\s*=\s*"([^"]+)"|title\s*=\s*'([^']+)'|title\s*=\s*([^\s]+)/);
-    if (titleMatch) title = titleMatch[1] || titleMatch[2] || titleMatch[3] || '';
+    const { lang, attrs } = parseFenceMeta(info);
+    const title = attrs.title || '';
+    let linenumStart = null;
+    if (Object.prototype.hasOwnProperty.call(attrs, 'linenums')) {
+      const start = parseInt(attrs.linenums, 10);
+      linenumStart = Number.isFinite(start) ? Math.max(start, 1) : 1;
+    }
 
-    const code = escapeHtml(body.join('\n'));
+    const hasLineNums = Number.isFinite(linenumStart);
     const titleHtml = title ? `<div class="code-title">${escapeHtml(title)}</div>` : '';
-    return { next: j, html: `${titleHtml}<pre><code>${code}</code></pre>` };
+    let codeHtml;
+    if (hasLineNums) {
+      codeHtml = body.map(line => {
+        const safeLine = line === '' ? '&nbsp;' : escapeHtml(line);
+        return `<span>${safeLine}</span>`;
+      }).join('\n');
+    } else {
+      codeHtml = escapeHtml(body.join('\n'));
+    }
+
+    const classes = [];
+    if (lang) classes.push(`language-${lang.replace(/[^\w-]+/g, '')}`);
+    if (hasLineNums) classes.push('has-linenums');
+    const attrsList = [];
+    if (classes.length) attrsList.push(`class="${classes.join(' ')}"`);
+    if (hasLineNums) attrsList.push(`style="--line-start:${linenumStart - 1};"`);
+    const preAttrs = attrsList.length ? ` ${attrsList.join(' ')}` : '';
+
+    return { next: j, html: `${titleHtml}<pre${preAttrs}><code>${codeHtml}</code></pre>` };
   }
 
   function parseInline(text) {
