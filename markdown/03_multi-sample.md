@@ -28,7 +28,6 @@ To move forward, let's create the file `samplesheet.csv` inside the folder `data
 ```csv title="data/samplesheet.csv" linenums="1"
 sample_id,fastq_1,fastq_2
 ERR2143768,/workspaces/training/nf4-science/KrakenFlow/data/samples/ERR2143768/ERR2143768_1.fastq,/workspaces/training/nf4-science/KrakenFlow/data/samples/ERR2143768/ERR2143768_2.fastq
-ERR2143769,/workspaces/training/nf4-science/KrakenFlow/data/samples/ERR2143769/ERR2143769_1.fastq,/workspaces/training/nf4-science/KrakenFlow/data/samples/ERR2143769/ERR2143769_2.fastq
 ERR2143770,/workspaces/training/nf4-science/KrakenFlow/data/samples/ERR2143770/ERR2143770_1.fastq,/workspaces/training/nf4-science/KrakenFlow/data/samples/ERR2143770/ERR2143770_2.fastq
 ERR2143774,/workspaces/training/nf4-science/KrakenFlow/data/samples/ERR2143774/ERR2143774_1.fastq,/workspaces/training/nf4-science/KrakenFlow/data/samples/ERR2143774/ERR2143774_2.fastq
 ```
@@ -208,13 +207,18 @@ Launching `main.nf` [stoic_miescher] DSL2 - revision: 8f65b983e6
 	___________________________________________________________________________________________________
 
 executor >  local (22)
-[4e/914152] KrakenFlow:BOWTIE2 (ERR2143774)           [100%] 4 of 4 ✔
-[bf/7fcac7] KrakenFlow:KRAKEN2 (ERR2143774)           [100%] 4 of 4 ✔
-[f5/aa12aa] KrakenFlow:BRACKEN (ERR2143774)           [100%] 4 of 4 ✔
-[e9/84eb9d] KrakenFlow:K_REPORT_TO_KRONA (ERR2143774) [100%] 4 of 4 ✔
-[59/456551] KrakenFlow:KT_IMPORT_TEXT (ERR2143768)    [100%] 4 of 4 ✔
+[4e/914152] KrakenFlow:BOWTIE2 (ERR2143774)           [100%] 3 of 3 ✔
+[bf/7fcac7] KrakenFlow:KRAKEN2 (ERR2143774)           [100%] 3 of 3 ✔
+[f5/aa12aa] KrakenFlow:BRACKEN (ERR2143774)           [100%] 3 of 3 ✔
+[e9/84eb9d] KrakenFlow:K_REPORT_TO_KRONA (ERR2143774) [100%] 3 of 3 ✔
+[59/456551] KrakenFlow:KT_IMPORT_TEXT (ERR2143768)    [100%] 3 of 3 ✔
 [da/7b9f45] KrakenFlow:KRAKEN_BIOM (merge_samples)    [100%] 1 of 1 ✔
 [d0/deccc9] KrakenFlow:KNIT_PHYLOSEQ (knit_phyloseq)  [100%] 1 of 1 ✔
+
+Completed at: 27-Nov-2025 13:03:40
+Duration    : 1m 36s
+CPU hours   : (a few seconds)
+Succeeded   : 10
 ```
 
 Keep in mind that since the execution is in parallel, the order in which the samples are processed is random and the order in which `sample ids` appear will differ among executions.
@@ -222,6 +226,19 @@ Also, while the pipeline is running you will see that `KRAKEN_BIOM`, and hence `
 
 Finally, inside the **output** directory, you will see multiple folders with the exact `sample ids`, and within these all the output files, including the files to visualize the Krona plots.
 Likewise, in the **output** folder you will see the file `report.html` which is ready to be opened and explored. It's your time to analyze it!
+
+Below you can see one the plots included in the report: an absolute abundance plot, where it is possible to compare the absolute number of annotated reads at genus level considering the custom database that we created for this tutorial with only 50 bacterial species:
+
+<div markdown class="metagenomics">
+
+![Metagenomics](../../assets/img/bracken_output.png)
+
+</div>
+
+!!!note
+
+    In case that the pipeline does not run in your environment, the output is available for you to check [here](https://github.com/jeffe107/krakenflow_tutorial).
+
 
 ---
 

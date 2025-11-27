@@ -75,7 +75,6 @@ Here you should see the following directory structure:
 │   │   └── taxo.k2d
 │   ├── samples
 │   │   ├── ERR2143768
-│   │   ├── ERR2143769
 │   │   ├── ERR2143770
 │   │   └── ERR2143774
 │   └── samplesheet.csv

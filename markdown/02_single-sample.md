@@ -473,8 +473,7 @@ You can either download it and open it in your browser, or install the [preview]
 
 !!!note
 
-    Keep in mind that we used a custom database **(only for an educational purpose)**, so you will see information about the bacterial species contained in the sample.
-    To perform the analysis with bacteria and beyond you have to download a different database from [here](https://benlangmead.github.io/aws-indexes/k2) or build your own.
+    In case that the pipeline does not run in your environment, the output is available for you to check [here](https://github.com/jeffe107/krakenflow_tutorial).
 
 ---
 
