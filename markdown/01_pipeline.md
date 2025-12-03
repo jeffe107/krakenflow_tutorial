@@ -2,9 +2,9 @@
 
 In the field of metagenomics data analysis, there is an endless universe of pipelines or methodologies you can follow to explore and characterize your samples.
 We recommend this comprehensive [review](https://www.sciencedirect.com/science/article/pii/S2001037021004931) for you to explore the different existing approaches.
-For this course, we propose to wrap with Nextflow the protocol published by [Jennifer Lu et al. (2022)](https://www.nature.com/articles/s41596-022-00738-y).
+For this course, we propose to wrap with Nextflow the protocol published by [Jennifer Lu *et al.* (2022)](https://www.nature.com/articles/s41596-022-00738-y).
 
-The example dataset we will use to demonstrate the analysis consists of only paired-end reads recovered from an oligotrophic, phosphorus-deficient pond in Cuatro Ciénegas, Mexico ([Okie et al.,2020](https://elifesciences.org/articles/49816)) in FASTQ format.
+The example dataset we will use to demonstrate the analysis consists of only paired-end reads recovered from an oligotrophic, phosphorus-deficient pond in Cuatro Ciénegas, Mexico ([Okie *et al.*, 2020](https://elifesciences.org/articles/49816)) in FASTQ format.
 The BioProject accession number is [PRJEB22811](https://www.ncbi.nlm.nih.gov/bioproject/PRJEB22811).
 
 ---

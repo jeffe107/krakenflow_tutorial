@@ -102,9 +102,9 @@ Here you should see the following directory structure:
 - **`bin`** is the directory where we store customized scripts that can be run within a given process.
 - **`data`** contains input data and related resources:
   - An indexed genome within the `genome` folder representing the host genome to which we want to map the reads for contamination removal.
-  - _krakendb_ is a directory that contains the Kraken2 database necessary for both taxonomic annotation and species abundance re-estimation.
-  - _samplesheet.csv_ lists the IDs and paths of the example data files, for processing in batches.
-  - _samples_ directory is where the raw sequences are stored.
+  - *krakendb* is a directory that contains the Kraken2 database necessary for both taxonomic annotation and species abundance re-estimation.
+  - *samplesheet.csv* lists the IDs and paths of the example data files, for processing in batches.
+  - *samples* directory is where the raw sequences are stored.
     The names correspond to accession numbers that you can search on the [Sequence Read Archive](https://www.ncbi.nlm.nih.gov/sra)
 
 !!!note
