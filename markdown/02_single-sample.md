@@ -269,14 +269,14 @@ This completes the implementation of the modules we need for the single-sample u
 ## 2. Create the `workflow.nf`
 
 There are several strategies for building Nextflow workflows.
-Here we are going to use a composable workflow structure as described in the [`Workflows of Workflows`](https://training.nextflow.io/latest/side_quests/workflows_of_workflows/) Side Quest, which uses an entrypoint workflow in a `main.nf` file, an embedded `workflow.nf` file containing the core logic of the workflow, and the `take` syntax to declare inputs.
+Here we are going to use a composable workflow structure as described in the [`Workflows of Workflows`](https://training.nextflow.io/latest/side_quests/workflows_of_workflows/) Side Quest, which uses an entrypoint workflow in a `single/main.nf` file, an embedded `single/workflow.nf` file containing the core logic of the workflow, and the `take` syntax to declare inputs.
 
 Let's start by creating the `workflow.nf` file that will the core logic of the workflow.
 Note that we create this file in our `single/` directory, NOT in `single/modules/`.
 
 We start by adding the following code to import modules:
 
-```groovy title="workflow.nf" linenums="1"
+```groovy title="single/workflow.nf" linenums="1"
 /*
  * required tasks
  */
@@ -294,7 +294,7 @@ Note that the process names should match exactly how they are written in the mod
 Now, let's write the workflow itself.
 We need to declare the primary input for the workflow and invoke the processes on the appropriate inputs.
 
-```groovy title="workflow.nf" linenums="10"
+```groovy title="single/workflow.nf" linenums="10"
 /*
  * workflow
  */
@@ -330,14 +330,14 @@ In the block `main`, you see the names of the processes with one or more paramet
 ## 3. Create the `main.nf` entrypoint workflow
 
 We are getting closer to running the pipeline!
-Let's create the `main.nf` file.
+Let's create the `single/main.nf` file.
 
 Within this file, we create a banner with the pipeline name to be shown when the execution starts using `log.info`.
 
 `log.info` is a method call on a logging object, and can be used to write informational messages to the Nextflow log during a pipeline's execution.
 You can learn more about this [here](https://carpentries-incubator.github.io/workflows-nextflow/11-Simple_Rna-Seq_pipeline.html#define-the-pipeline-parameters).
 
-```groovy title="main.nf" linenums="1"
+```groovy title="single/main.nf" linenums="1"
 #!/usr/bin/env nextflow
 
 log.info """\
@@ -356,7 +356,7 @@ log.info """\
 .stripIndent()
 ```
 
-Then we add an `include` statement to import the `kraken2Flow` workflow from the './workflow.nf' file, as well as a `workflow` block that sets up an input channel and invokes the `kraken2Flow` workflow:
+Then we add an `include` statement to import the `kraken2Flow` workflow from the 'single/workflow.nf' file, as well as a `workflow` block that sets up an input channel and invokes the `kraken2Flow` workflow:
 
 ```groovy title="main.nf" linenums="18"
 include {KrakenFlow} from './workflow.nf'
@@ -376,11 +376,11 @@ workflow {
 
 ## 4. Create the `nextflow.config` configuration file
 
-Finally, we create the file `nextflow.config`, where we'll set up the configuration of our pipeline.
+Finally, we create the file `single/nextflow.config`, where we'll set up the configuration of our pipeline.
 
 This is where we provide default input parameters for the pipeline and enable the use of Docker containers.
 
-```groovy title="nextflow.config" linenums="1"
+```groovy title="single/nextflow.config" linenums="1"
 /*
  * pipeline input parameters
  */
@@ -409,7 +409,7 @@ That's it, we are all set to run the pipeline!
 Let's just pick one of the samples provided (you can choose any of them) and run the following command:
 
 ```bash
-nextflow run main.nf --reads 'data/samples/ERR2143768/ERR2143768_{1,2}.fastq'
+nextflow run single/main.nf --reads 'data/samples/ERR2143768/ERR2143768_{1,2}.fastq'
 ```
 
 On the output of the command line, you will see:
