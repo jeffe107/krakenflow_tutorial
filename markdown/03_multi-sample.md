@@ -231,7 +231,7 @@ Also, while the pipeline is running you will see that `KRAKEN_BIOM`, and hence `
 Finally, inside the **output** directory, you will see multiple folders with the exact `sample ids`, and within these all the output files, including the files to visualize the Krona plots.
 Likewise, in the **output** folder you will see the file `report.html` which is ready to be opened and explored. It's your time to analyze it!
 
-Below you can see one the plots included in the report: an absolute abundance plot, where it is possible to compare the absolute number of annotated reads at genus level considering the custom database that we created for this tutorial with only 50 bacterial species:
+Below you can see one the plots included in the report: an absolute abundance plot, where it is possible to compare the absolute number of annotated reads at genus level considering the custom database that we created for this tutorial with only 54 bacterial species (we applied a filter to keep only genera with relative above 3%):
 
 <div markdown class="metagenomics">
 
