@@ -21,9 +21,9 @@ Each module corresponds to a step in the pipeline.
 
 As noted in the method overview, the objective of this module is to clean the reads by aligning them against a reference genome and remove any reads that map to that reference.
 
-Let's create the `bowtie2.nf` file inside the `modules/` folder and write the following code:
+Let's create the `bowtie2.nf` file inside the `single/modules/` folder and write the following code:
 
-```groovy title="modules/bowtie2.nf" linenums="1"
+```groovy title="single/modules/bowtie2.nf" linenums="1"
 process BOWTIE2 {
     tag "${sample_id}"
     publishDir "$params.outdir/${sample_id}", pattern: "*.sam", mode:'copy'
@@ -88,9 +88,9 @@ The `script` block contains two commands:
 
 Now, let's create the module for our taxonomic classifier.
 
-Let's create `kraken2.nf` file inside the `modules/` folder and write this code:
+Let's create `kraken2.nf` file inside the `single/modules/` folder and write this code:
 
-```groovy title="modules/kraken2.nf" linenums="1"
+```groovy title="single/modules/kraken2.nf" linenums="1"
 process KRAKEN2 {
 	tag "${sample_id}"
 	publishDir "$params.outdir/${sample_id}", mode:'copy'
@@ -147,9 +147,9 @@ This [article](https://homolog.us/blogs/bioinfo/2017/10/25/intro-minimizer/) abo
 
 ### 1.3. Apply Bayesian re-estimation of species abundance with Bracken
 
-Let's create the file `bracken.nf` inside `modules/` and write the following code:
+Let's create the file `bracken.nf` inside `single/modules/` and write the following code:
 
-```groovy title="modules/bracken.nf" linenums="1"
+```groovy title="single/modules/bracken.nf" linenums="1"
 process BRACKEN {
 	tag "${sample_id}"
 	publishDir "$params.outdir/${sample_id}", mode:'copy'
@@ -204,9 +204,9 @@ To generate them, we will need two distinct processes; one to extract species ab
 
 #### 1.4.1. Extract the species abundance metrics
 
-Let's create the file `kReport2Krona.nf` inside `modules` and write the following code:
+Let's create the file `kReport2Krona.nf` inside `single/modules/` and write the following code:
 
-```groovy title="modules/kReport2Krona.nf" linenums="1"
+```groovy title="single/modules/kReport2Krona.nf" linenums="1"
 process K_REPORT_TO_KRONA {
 	tag "${sample_id}"
 	publishDir "$params.outdir/${sample_id}", mode:'copy'
@@ -236,9 +236,9 @@ For more information about that option, see the KrakenTools documentation refere
 
 #### 1.4.2. Extract the species abundance metrics
 
-Let's create the file `ktImportText.nf` inside `modules/` and write the following code:
+Let's create the file `ktImportText.nf` inside `single/modules/` and write the following code:
 
-```groovy title="modules/ktImportText.nf" linenums="1"
+```groovy title="single/modules/ktImportText.nf" linenums="1"
 process KT_IMPORT_TEXT {
 	tag "${sample_id}"
 	publishDir "$params.outdir/${sample_id}", mode:'copy'
@@ -272,7 +272,7 @@ There are several strategies for building Nextflow workflows.
 Here we are going to use a composable workflow structure as described in the [`Workflows of Workflows`](https://training.nextflow.io/latest/side_quests/workflows_of_workflows/) Side Quest, which uses an entrypoint workflow in a `main.nf` file, an embedded `workflow.nf` file containing the core logic of the workflow, and the `take` syntax to declare inputs.
 
 Let's start by creating the `workflow.nf` file that will the core logic of the workflow.
-Note that we create this file in our current directory, NOT in the `modules/` directory.
+Note that we create this file in our `single/` directory, NOT in `single/modules/`.
 
 We start by adding the following code to import modules:
 
