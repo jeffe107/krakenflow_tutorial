@@ -48,11 +48,11 @@ Now, we need to modify the `main.nf` file to state how the input should be handl
 
 ```groovy title="main.nf" linenums="22"
 	    if(params.reads){
-		    reads_ch = Channel .fromFilePairs( params.reads, checkIfExists:true )
+		    reads_ch = Channel.fromFilePairs(params.reads, checkIfExists:true)
 		} else {
-		    reads_ch = Channel.fromPath( params.sheet_csv )
+		    reads_ch = Channel.fromPath(params.sheet_csv)
 				   .splitCsv(header:true)
-				   .map { row-> tuple(row.sample_id, [file(row.fastq_1), file(row.fastq_2)]) }
+				   .map {row-> tuple(row.sample_id, [file(row.fastq_1), file(row.fastq_2)])}
 		}
 ```
 
