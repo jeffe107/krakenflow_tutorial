@@ -165,7 +165,7 @@ process BRACKEN {
 	script:
 	"""
 	bracken -d $kraken2_db \
-	-i ${k2report} -r 250 -l S -t 10 \
+	-i ${k2report} -r 250 -l S -t 2 \
 	-o ${sample_id}.bracken \
 	-w ${sample_id}.breport
 	"""
