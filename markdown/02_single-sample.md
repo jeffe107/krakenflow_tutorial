@@ -271,7 +271,7 @@ This completes the implementation of the modules we need for the single-sample u
 There are several strategies for building Nextflow workflows.
 Here we are going to use a composable workflow structure as described in the [`Workflows of Workflows`](https://training.nextflow.io/latest/side_quests/workflows_of_workflows/) Side Quest, which uses an entrypoint workflow in a `single/main.nf` file, an embedded `single/workflow.nf` file containing the core logic of the workflow, and the `take` syntax to declare inputs.
 
-Let's start by creating the `workflow.nf` file that will the core logic of the workflow.
+Let's start by creating the `single/workflow.nf` file that will the core logic of the workflow.
 Note that we create this file in our `single/` directory, NOT in `single/modules/`.
 
 We start by adding the following code to import modules:
