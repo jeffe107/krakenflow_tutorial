@@ -1,4 +1,4 @@
-# KrakenFlow: The tutorial
+# TaxoFlow: The tutorial
 
 This tutorial is designed for researchers on focused metagenomics (WGS/shotgun) data analysis who are interested in developing or customizing taxonomic annotation pipelines.
 It builds on the [Hello Nextflow](https://training.nextflow.io/latest/hello_nextflow/) and [Nextflow for RNAseq](https://training.nextflow.io/latest/nf4_science/rnaseq/) beginner training and demonstrates how to use Nextflow in the specific context of metagenomics data analysis.
