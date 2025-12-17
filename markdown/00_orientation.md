@@ -56,10 +56,8 @@ Here you should see the following directory structure:
 ```console title="Directory contents"
 .
 ├── assets
-│   ├── logo_TaxoFlow.png
-│   └── workflow_TaxoFlow.png
-├── bin
-│   └── report.Rmd
+│   ├── taxoflow_logo.png
+│   └── workflow_taxoflow.png
 ├── data
 │   ├── genome
 │   │   └── TAIR10
@@ -79,18 +77,31 @@ Here you should see the following directory structure:
 │   │   └── ERR2143774
 │   └── samplesheet.csv
 ├── LICENSE
-├── main.nf
-├── modules
-│   ├── bowtie2.nf
-│   ├── bracken.nf
-│   ├── knit_phyloseq.nf
-│   ├── kraken2.nf
-│   ├── kraken_biom.nf
-│   ├── kReport2Krona.nf
-│   └── ktImportText.nf
-├── nextflow.config
+├── multi
+│   ├── bin
+│   │   └── report.Rmd
+│   ├── main.nf
+│   ├── modules
+│   │   ├── bowtie2.nf
+│   │   ├── bracken.nf
+│   │   ├── knit_phyloseq.nf
+│   │   ├── kraken2.nf
+│   │   ├── kraken_biom.nf
+│   │   ├── kReport2Krona.nf
+│   │   └── ktImportText.nf
+│   ├── nextflow.config
+│   └── workflow.nf
 ├── README.md
-└── workflow.nf
+└── single
+    ├── main.nf
+    ├── modules
+    │   ├── bowtie2.nf
+    │   ├── bracken.nf
+    │   ├── kraken2.nf
+    │   ├── kReport2Krona.nf
+    │   └── ktImportText.nf
+    ├── nextflow.config
+    └── workflow.nf
 ```
 
 **This a summarized description of the files and directories found:**
