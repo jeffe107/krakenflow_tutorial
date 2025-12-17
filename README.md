@@ -1,6 +1,6 @@
 # TaxoFlow: The tutorial
 <p align="center">
-    <img class="brand" src="assets/Kraken_logo.png" alt="TaxoFlow logo" width="50%">
+    <img class="brand" src="assets/taxoflow_logo.png" alt="TaxoFlow logo" width="50%">
 </p>
 
 The tutorial is designed for researchers on focused metagenomics (WGS/shotgun) data analysis who are interested in developing or customizing taxonomic annotation pipelines.
@@ -30,6 +30,7 @@ The tutorial assumes some minimal familiarity with the following:
 - Tools and file formats commonly used in this scientific domain
 - Experience with the command line
 - Foundational Nextflow concepts and tooling covered in the [Hello Nextflow](https://training.nextflow.io/latest/hello_nextflow/) and [Nextflow for RNAseq](https://training.nextflow.io/latest/nf4_science/rnaseq/) beginner training.
+
 
 
 
