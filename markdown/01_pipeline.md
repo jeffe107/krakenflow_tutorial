@@ -15,7 +15,7 @@ Our goal is to develop a workflow that takes **FASTQ** files from one or multipl
 
 <div markdown class="metagenomics">
 
-![Metagenomics](../../assets/img/workflow_krakenflow.png)
+![Metagenomics](../../assets/img/workflow_taxoflow.png)
 
 </div>
 
